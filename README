@@ -1,0 +1,300 @@
+Selfservice-Kiosk-App für die Gastronomie
+auf Android für den deutschen Markt
+Inhalt:
+1. Hauptfunktionen einer Gastro-Kiosk-App
+2. Technisches Konzept: Struktur & Komponenten
+3. Storyboard für die Selfservice-Kiosk-App
+4. Projektstruktur in Figma
+5. Wichtige Aspekte für den Backend-/Adminbereich
+6. Benötigte Hardware
+1. Hauptfunktionen einer Gastro-Kiosk-App
+Ein modernes Selfservice-System sollte folgende Kernfunktionen bieten:
+􊾆 Bestellprozess
+ Digitale Speisekarte mit Bildern, Beschreibungen und Filteroptionen (z.􀯗B.
+vegan, glutenfrei)
+ Individuelle Anpassung von Gerichten (z.􀯗B. Zutaten hinzufügen/entfernen)
+ Mehrsprachigkeit, Deutsch, Englisch und ggf. Türkisch oder Arabisch
+􊴴􊴵􊴶􊴸􊴷 Zahlungsabwicklung
+ Integration von Zahlungsarten: EC/Kreditkarte, kontaktlos (NFC), mobile
+Payment (Apple Pay, Google Pay)
+ Rechnungsdruck oder digitale Quittung
+􍭘􍭙 Backend & Verwaltung
+ Verwaltung von Produkten und Preisen
+ Live-Status von Bestellungen
+ Statistiken und Umsatzanalysen
+􈻁􈻂 Benutzerfreundlichkeit
+ Intuitive UI/UX für schnelle Bedienung
+ Barrierefreiheit (z.􀯗B. große Buttons, Kontrastmodus)
+ O􀆯line-Funktionalität bei Netzproblemen
+􊻾􊻿􊼀􊻽 Sicherheit & Datenschutz
+ DSGVO-konforme Speicherung und Verarbeitung von Daten
+ Sichere Kommunikation mit dem Server (HTTPS, Verschlüsselung)
+􈓺􈓻􈓸􈓹 Mehrwertsteuer (Umsatzsteuer) – rechtlich relevant
+􊾆 Speisen vor Ort
+ 19􀯗% MwSt. (Regelsteuersatz)
+ Gilt für Speisen, die im Restaurant/Kiosk verzehrt werden
+􊾆 Speisen zum Mitnehmen
+ 7􀯗% MwSt. (ermäßigter Satz)
+ Gilt für Speisen, die verpackt und ohne Service mitgenommen werden
+􊾆 Lieferung
+ 7􀯗% MwSt. ebenfalls
+2. Technisches Konzept: Struktur & Komponenten
+1. Systemarchitektur
+ Frontend: Native Android-App (Kotlin oder Java)
+ Backend: RESTful API mit Node.js, Python (Django/Flask) oder Java (Spring Boot)
+ Datenbank: PostgreSQL oder Firebase für Echtzeitdaten
+ Cloud-Hosting: z.􀯗B. AWS, Google Cloud oder Azure
+2. Modulübersicht
+Modul Funktion
+Menüverwaltung Speisekarte, Kategorien, Produktdetails, Bilder
+Bestelllogik Warenkorb, Modifikationen, Sonderwünsche
+Zahlungsintegration Anbindung an Payment Provider (SumUp, Stripe, PayPal, etc.)
+Druckersteuerung Anbindung an Bondrucker für Küche und Quittungen
+Benutzeroberfläche Touch-optimiertes UI, barrierefrei, mehrsprachig
+Admin-Dashboard Produktpflege, Statistiken, Tagesumsätze
+O􀆯line-Modus Lokale Speicherung bei Netzverlust
+3. Schnittstellen
+ POS-Systeme (z.􀯗B. Vectron, Lightspeed)
+ Zahlungsanbieter (z.􀯗B. SumUp, Adyen)
+ Drucker (ESC/POS-kompatibel)
+4. Sicherheit & Datenschutz
+ DSGVO-konforme Speicherung
+ Verschlüsselung (HTTPS, JWT)
+ Rollenbasierte Zugri􀆯skontrolle
+􍫛􍫜􍫝􍫟􍫞 Prototyp: Schnellstart mit MVP
+􊽎 Tools für den Prototyp
+ Android Studio für die App-Entwicklung
+ Figma oder Adobe XD für UI-Design
+ Firebase für schnelles Backend & Authentifizierung
+ Mock Payment API für Testzahlungen
+􋝙􋝚􋝞􋝛􋝜􋝝 MVP-Funktionen (Minimum Viable Product)
+1. Startbildschirm mit Logo und Spracheinstellung
+2. Digitale Speisekarte mit Kategorien und Produkten
+3. Bestellfunktion mit Warenkorb
+4. Zahlungssimulation (z.􀯗B. „Bezahlen“ ohne echte Transaktion)
+5. Bestellübersicht für Küche (lokal oder über Backend)
+􊹳􊹶􊹷􊹴􊹵􊹸 Beispielhafte UI-Flows
+ Flow 1: Sprache wählen → Kategorie → Produkt → Warenkorb → Bestellung
+abschließen
+ Flow 2: Admin-Login → Produkt hinzufügen → Preis ändern → Statistik anzeigen
+3. Storyboard für die Selfservice-Kiosk-App
+􋰄 1. Startbildschirm – Begrüßung & Sprache
+Zweck: Einstiegspunkt, einfache Orientierung
+ Elemente:
+o Logo des Restaurants oder App
+o Begrüßungstext: „Willkommen! Bitte wählen Sie Ihre Sprache.“
+o Sprachwahl-Buttons (z.􀯗B. Deutsch, Englisch, Türkisch)
+o „Jetzt bestellen“-Button erscheint nach Auswahl
+Aktion: Nutzer wählt Sprache → Weiter zur Speisekarte
+􈓺􈓻􈓸􈓹 2. Speisekarte – Kategorien & Produkte
+Zweck: Nutzer stöbern durch das Angebot
+ Elemente:
+o Kategorien (z.􀯗B. Burger, Pizza, Getränke)
+o Produktkarten mit Bild, Name, Preis
+o „+“-Button zum Hinzufügen
+o Optional: „Anpassen“-Button für Zutaten
+Aktion: Nutzer wählt Produkte → Warenkorb wird aktualisiert
+􋭖􋭗􋭘􋭙􋭚 3. Warenkorb – Übersicht & Bearbeitung
+Zweck: Bestellung prüfen und anpassen
+ Elemente:
+o Liste der gewählten Artikel
+o Mengen ändern oder löschen
+o Zwischensumme, MwSt., Gesamtpreis
+o „Zur Kasse“-Button
+Aktion: Nutzer klickt „Zur Kasse“ → Weiter zur Zahlungsseite
+􊴴􊴵􊴶􊴸􊴷 4. Zahlungsseite – Zahlungsmethode wählen
+Zweck: Bezahlung abschließen
+ Elemente:
+o Auswahl: EC-Karte, Kreditkarte, Apple Pay, Google Pay
+o Hinweis zu Datenschutz & Sicherheit
+o „Bezahlen“-Button
+Aktion: Nutzer bezahlt → Weiter zur Bestellbestätigung
+􈆆􎀱 5. Bestellbestätigung – Abschluss
+Zweck: Bestellung abschließen und Info geben
+ Elemente:
+o Bestellnummer
+o „Ihre Bestellung wird zubereitet“
+o Optional: QR-Code oder Abholnummer
+o Button: „Neue Bestellung starten“
+Aktion: Nutzer verlässt Screen oder startet neue Bestellung
+􎂫􎂬􎂭 6. Admin-Dashboard (optional, nur für Personal)
+Zweck: Verwaltung & Kontrolle
+ Elemente:
+o Login-Maske
+o Produktverwaltung
+o Statistik-Ansicht
+o Tagesumsatz, Bestellhistorie
+4. Projektstruktur in Figma
+Erstelle ein neues Figma-Projekt mit folgenden Frames (Screens):
+Screen-Name Zweck
+Startscreen Begrüßung & Sprache wählen
+Speisekarte Kategorien & Produktübersicht
+Produktdetails Anpassung & Hinzufügen
+Warenkorb Übersicht & „Zur Kasse“-Button
+Zahlungsseite Zahlungsmethode wählen
+Bestellbestätigung Abschluss & neue Bestellung
+􈙞􈙠􈙡􈙢 2. UI-Elemente pro Screen
+􋰄 Startscreen
+ Logo oben
+ Text: „Willkommen! Bitte wählen Sie Ihre Sprache.“
+ Buttons: Deutsch, Englisch, Türkisch
+ „Jetzt bestellen“-Button → Link zur Speisekarte
+􈓺􈓻􈓸􈓹 Speisekarte
+ Kategorien als horizontale Leiste
+ Produktkarten mit Bild, Name, Preis, „+“-Button
+ Klick auf Produkt → Link zu Produktdetails
+􍭘􍭙 Produktdetails
+ Bild, Beschreibung, Zutaten
+ Optionen zum Anpassen (Checkboxen, Dropdowns)
+ „Hinzufügen zum Warenkorb“-Button → Link zu Warenkorb
+􋭖􋭗􋭘􋭙􋭚 Warenkorb
+ Liste der Artikel
+ Mengen ändern, löschen
+ „Zur Kasse“-Button → Link zur Zahlungsseite
+􊴴􊴵􊴶􊴸􊴷 Zahlungsseite
+ Auswahl: EC, Kreditkarte, Apple Pay, Google Pay
+ „Bezahlen“-Button → Link zur Bestellbestätigung
+􈆆􎀱 Bestellbestätigung
+ Text: „Ihre Bestellung wird zubereitet“
+ Bestellnummer oder QR-Code
+ Button: „Neue Bestellung starten“ → Link zurück zum Startscreen
+􊼏􊼐 3. Interaktive Verlinkung
+In Figma:
+ Wähle ein Element (z.􀯗B. Button)
+ Klicke auf „Prototype“ oben rechts
+ Ziehe den Pfeil zum Ziel-Frame
+ Wähle „On Tap“ → „Navigate to [Frame]“
+Optional:
+ Animationen (z.􀯗B. „Smart Animate“ beim Übergang)
+ Overlay für Pop-ups (z.􀯗B. Produktdetails)
+5. Wichtige Aspekte für den Backend-/Adminbereich
+􊻾􊻿􊼀􊻽 1. Sicherheit & Zugri􀆯skontrolle
+ Benutzerverwaltung mit Rollen (z.􀯗B. Admin, Manager, Küchenpersonal)
+ Zwei-Faktor-Authentifizierung (2FA) für sensible Funktionen
+ Verschlüsselte Kommunikation (HTTPS, JWT für API-Zugri􀆯e)
+ DSGVO-Konformität: Logging, Datenlöschung, Einwilligungsverwaltung
+􍭘􍭙 2. Produkt- & Menüverwaltung
+ Produkte anlegen, bearbeiten, deaktivieren
+ Kategorien verwalten (z.􀯗B. „Burger“, „Getränke“)
+ Bilder-Upload, Preisgestaltung, Zutatenlisten
+ Allergene & Zusatzsto􀆯e kennzeichnen (gesetzlich vorgeschrieben in DE)
+􊸶􊸷􊸸􊸹􊸺􊸻 3. Bestell- & Zahlungsübersicht
+ Live-Ansicht aller laufenden Bestellungen
+ Historie mit Filterfunktionen (Datum, Uhrzeit, Produkt, Umsatz)
+ Zahlungsstatus (bezahlt, o􀆯en, storniert)
+ Exportfunktion für Buchhaltung (CSV, PDF)
+􊶬􊶨􊶭􊶮􊶯 4. Statistiken & Auswertungen
+ Tages-/Wochen-/Monatsumsätze
+ Beliebteste Produkte
+ Stoßzeiten & Auslastung
+ Retourenquote oder Stornierungen
+􎂫􎂬􎂭 5. Systemeinstellungen
+ Ö􀆯nungszeiten, Mehrwertsteuersätze
+ Spracheinstellungen der App
+ Drucker- und Hardwarekonfiguration
+ API-Schlüssel für externe Dienste (z.􀯗B. Zahlungsanbieter)
+􍫙􍫚 Aufbau & Technologieempfehlung
+􊽎 Technologie-Stack (Beispiel)
+Komponente Empfehlung
+Backend-Server Node.js, Django oder Spring Boot
+Datenbank PostgreSQL, MySQL oder MongoDB
+Admin-UI React.js, Vue.js oder Angular
+Authentifizierung OAuth2, Firebase Auth, Keycloak
+Hosting AWS, Azure oder Google Cloud
+􊵶􊵷 Struktur (modular)
+ /auth → Login, Rollen, Tokens
+ /products → Menüverwaltung
+ /orders → Bestelllogik & Status
+ /payments → Zahlungsabwicklung
+ /analytics → Statistiken & Reports
+ /settings → Konfiguration & Systemsteuerung
+Layoutstruktur: Zwei-Spalten-Design
+􊾆 Linke Spalte – Navigation (Sidebar)
+Ein vertikales Menü mit Icons und Text:
+ 􈫝􈫞􈫣􈫟􈫠􈫡􈫢 Dashboard – Übersicht
+ 􈎙􈎚􈎢􈎛􈎜􈎣􈎝􈎞􈎟􈎠􈎡 Produkte – Speisekarte verwalten
+ 􊸶􊸷􊸸􊸹􊸺􊸻 Bestellungen – Live-Status & Historie
+ 􊴴􊴵􊴶􊴸􊴷 Zahlungen – Transaktionen & Abgleich
+ 􊶬􊶨􊶭􊶮􊶯 Statistiken – Umsatz, Trends, Top-Produkte
+ 􎂫􎂬􎂭 Einstellungen – System, Sprache, Steuern
+ 􈺽􈺾􈺿􈻀 Benutzerverwaltung – Rollen & Rechte
+Design-Tipp: Nutze klare Icons (z.􀯗B. Material Icons), Hover-E􀆯ekte und aktive Zustände.
+􊾅 Rechte Hauptfläche – Inhalt je nach Auswahl
+􈫝􈫞􈫣􈫟􈫠􈫡􈫢 Dashboard (Startseite)
+ Umsatzübersicht (z.􀯗B. Balkendiagramm: Tages-/Wochenumsatz)
+ Live-Bestellungen (Tabelle mit Status: „In Zubereitung“, „Fertig“, „Abgeholt“)
+ Top-Produkte (Liste mit Bildern & Verkaufszahlen)
+ Systemstatus (z.􀯗B. Drucker online/o􀆯line, letzte Synchronisierung)
+􈎙􈎚􈎢􈎛􈎜􈎣􈎝􈎞􈎟􈎠􈎡 Produkte
+ Produktliste mit:
+o Bild, Name, Preis, Kategorie
+o „Bearbeiten“-, „Deaktivieren“-Buttons
+ Filter nach Kategorie, Preisbereich, Verfügbarkeit
+ „Neues Produkt hinzufügen“-Button → ö􀆯net Modal oder separates Formular
+􊸶􊸷􊸸􊸹􊸺􊸻 Bestellungen
+ Tabelle mit:
+o Bestellnummer, Uhrzeit, Produkte, Gesamtbetrag, Status
+ Filter: Datum, Status, Zahlungsmethode
+ Button: „Details anzeigen“ → ö􀆯net Bestellinfo
+􊴴􊴵􊴶􊴸􊴷 Zahlungen
+ Transaktionsliste mit:
+o Betrag, Zahlungsmethode, Status (erfolgreich, fehlgeschlagen)
+ Exportfunktion (CSV/PDF)
+ Abgleich mit externem Zahlungsanbieter
+􊶬􊶨􊶭􊶮􊶯 Statistiken
+ Diagramme:
+o Umsatzverlauf (Linien- oder Balkendiagramm)
+o Produktverkäufe nach Kategorie
+o Stoßzeiten (Heatmap oder Zeitstrahl)
+ Export & Vergleichsoptionen
+􎂫􎂬􎂭 Einstellungen
+ Mehrwertsteuersätze
+ Ö􀆯nungszeiten
+ Drucker-Konfiguration
+ API-Schlüsselverwaltung
+􈺽􈺾􈺿􈻀 Benutzerverwaltung
+ Liste aller Nutzer mit Rollen
+ Rechtevergabe (z.􀯗B. „Nur Leserechte“, „Vollzugri􀆯“)
+ Passwort zurücksetzen, Benutzer deaktivieren
+􈙞􈙠􈙡􈙢 Design-Empfehlungen
+ Farbschema: Dunkles Sidebar-Design mit heller Hauptfläche (z.􀯗B. Grau/Weiß +
+Akzentfarbe)
+ Responsives Layout: Auch für Tablets oder kleinere Admin-Terminals geeignet
+ Feedback-Elemente: Toasts für „Erfolgreich gespeichert“, „Fehler beim Laden“,
+etc.
+6. Benötigte Hardware
+1. Kiosk-Terminal (Touchscreen-Gerät)
+ Typ: Android-basiertes Tablet oder Industrie-Touchscreen (22–27 Zoll)
+ Merkmale: Robust, vandalismussicher, hohe Helligkeit, kapazitiver Touch
+ Montage: Standfuß, Wandhalterung oder Thekenintegration
+􍭘􍭙 2. Bondrucker / Küchen-Drucker
+ Typ: Thermodrucker (z.􀯗B. Epson TM-T88, Star Micronics)
+ Verwendung:
+o Kundenquittung am Kiosk
+o Küchenbon zur Zubereitung
+ Anbindung: USB, LAN oder Bluetooth
+ Format: ESC/POS-kompatibel für einfache Integration
+􊸔􊸕􊸖􊸗􊸘 3. Küchendisplay / Order-Screen
+ Typ: Touchscreen-Monitor oder Tablet mit Bestellübersicht
+ Funktion: Zeigt neue Bestellungen, Status, Priorität
+ Software: Web-Interface oder native App mit Echtzeit-Updates
+ Optional: Akustisches Signal bei neuer Bestellung
+􊴴􊴵􊴶􊴸􊴷 4. Zahlungs-Hardware
+ Kartenleser: z.􀯗B. SumUp, Verifone, Ingenico
+ Unterstützt: EC, Kreditkarte, NFC (Apple Pay, Google Pay)
+ Integration: Direkt in die App oder über externes Terminal
+􊺐􊺑􊺒􊺓􊺖􊺔􊺗􊺕 5. Scanner (optional)
+ Typ: QR-/Barcode-Scanner
+ Verwendung: Gutscheine, Kundenkarten, Mitarbeiter-Login
+ Montage: Eingebaut im Kiosk oder extern per USB
+􊻮􊻯􊻰 6. Weitere Komponenten
+ USV (unterbrechungsfreie Stromversorgung) für Ausfallsicherheit
+ Netzwerk-Hardware: LAN/WLAN-Router mit stabiler Verbindung
+ Kühlung & Gehäuse: Bei Outdoor-Kiosken wichtig für Temperaturkontrolle
+􍫙􍫚 Beispiel-Konfiguration für ein kleines Restaurant
+Komponente Modellvorschlag
+Kiosk-Terminal Android-Tablet mit 24" Touch
+Drucker Epson TM-T88V
+Kartenleser SumUp Air oder Verifone V200c
+Küchendisplay 15" Tablet mit Web-Dashboard
+Scanner Zebra DS2208
